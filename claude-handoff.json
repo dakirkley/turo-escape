@@ -1,0 +1,39 @@
+{
+  "project_name": "TuroEscape",
+  "build_goal": "Lead generation landing page with Turo vs Private earnings calculator for luxury car hosts",
+  "stack": {
+    "frontend": "Next.js 14 App Router",
+    "styling": "Tailwind CSS",
+    "database": "SQLite (better-sqlite3)",
+    "language": "TypeScript"
+  },
+  "features": [
+    "Landing page with hero, pain points, calculator CTA, FAQ",
+    "Interactive calculator (rental days, daily rate, car count)",
+    "Email gate modal before showing results",
+    "Results page with Turo vs Private comparison",
+    "Admin dashboard with password protection",
+    "Lead capture and CSV export"
+  ],
+  "routes": [
+    "/ - Landing page",
+    "/admin - Dashboard (password protected)"
+  ],
+  "data_model": {
+    "Lead": {
+      "id": "string",
+      "email": "string",
+      "carCount": "number",
+      "monthlyDays": "number",
+      "dailyRate": "number",
+      "turoCommission": "number (default 0.30)",
+      "calculatedMonthlyLoss": "number",
+      "calculatedYearlyLoss": "number",
+      "createdAt": "datetime",
+      "source": "string"
+    }
+  },
+  "ui_notes": "Dark premium aesthetic, emerald green primary (money theme), slate grays, luxury car market feel, mobile-first responsive",
+  "constraints": "MVP speed, production-ready, no placeholder functionality",
+  "claude_prompt": "Build a Next.js 14 lead generation landing page called TuroEscape — a calculator that shows Turo hosts how much more money they would make by going private.\n\nProduct Overview:\nSingle-page landing site with an interactive earnings calculator. Target audience is luxury/exotic car Turo hosts. The goal is capturing email addresses.\n\nRequired Pages/Components:\n\n1. Landing Page (app/page.tsx)\n   - Hero section: Headline Stop Giving Turo 40% of Your Money + subheadline about keeping more revenue and owning customer relationships\n   - Pain points section: Turo high commissions, no customer ownership, strict policies\n   - Calculator CTA section\n   - FAQ section (5 common questions about going private)\n   - Footer\n\n2. Calculator Component (components/Calculator.tsx)\n   - 3 input fields: Monthly rental days (slider 1-30), Average daily rate ($ input), Number of cars (1-20)\n   - Calculate My Earnings button\n   - On submit: Show email gate modal (overlay)\n\n3. Email Gate Modal (components/EmailGate.tsx)\n   - Overlay with: See your results + email input + Show Me The Money button\n   - Stores lead in database before showing results\n\n4. Results Component (components/Results.tsx)\n   - Big headline: You would make $X more per year going private\n   - Comparison table: Turo vs Private (monthly revenue, platform fees, net earnings)\n   - 3-year projection\n   - CTA: Get the Complete Guide (placeholder button)\n\n5. Admin Dashboard (app/admin/page.tsx)\n   - Simple password protection (env var: ADMIN_PASSWORD)\n   - Table showing all leads: email, car count, monthly days, rate, calculated yearly savings, date\n   - Export CSV button\n   - Stats cards: Total leads, avg yearly savings\n\n6. Database (lib/db.ts)\n   - SQLite with better-sqlite3\n   - Lead table schema: id, email, carCount, monthlyDays, dailyRate, turoCommission, calculatedMonthlyLoss, calculatedYearlyLoss, createdAt, source\n   - Functions: createLead, getAllLeads, getLeadStats\n\nDesign Requirements:\n- Use Tailwind CSS with a dark, premium aesthetic (luxury car market)\n- Primary color: Emerald green (money/profit theme)\n- Secondary: Slate grays\n- Clean, modern, trust-building design\n- Fully responsive (mobile-first)\n- Smooth animations on calculator interactions\n\nTechnical Requirements:\n- Next.js 14 App Router\n- TypeScript throughout\n- Server Actions for form submissions\n- SQLite database (better-sqlite3)\n- Environment variables for admin password\n- Rate limiting on submissions (simple in-memory)\n\nCalculator Logic:\n- Turo commission: 30% (configurable)\n- Private payment processing: 5%\n- Calculate monthly and yearly savings\n- Show 3-year projection\n\nFile Structure:\napp/\n  page.tsx (landing)\n  admin/page.tsx (dashboard)\n  layout.tsx\ncomponents/\n  Calculator.tsx\n  EmailGate.tsx\n  Results.tsx\n  LeadTable.tsx\nlib/\n  db.ts (database)\n  calculations.ts (math logic)\npublic/\nnext.config.js\ntailwind.config.ts\n\nQuality Standards:\n- Production-ready code\n- No placeholder text in UI\n- Proper error handling\n- Clean, commented code\n- SEO meta tags\n- OpenGraph image\n\nBuild this as a complete, deployable MVP. Focus on the core flow: land → calculate → enter email → see results. Everything should work end-to-end."
+}
